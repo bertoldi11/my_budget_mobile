@@ -1,5 +1,19 @@
 This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
 
+## Projeto irmão: `../my_budget` (API Phoenix)
+
+Este app é o cliente mobile do projeto Phoenix/LiveView em `../my_budget`. São dois repos git
+separados, mas um sistema só.
+
+- **Antes de implementar qualquer funcionalidade aqui, verificar se `../my_budget` precisa ser
+  alterado também** — rota (`lib/my_budget_web/router.ex`), contexto, schema, migration,
+  serialização ou permissão. Informar explicitamente o que falta lá, mesmo quando a conclusão for
+  "nada a mudar".
+- **A regra vale nas duas direções:** uma mudança em `../my_budget` que mexa na API, no contrato
+  JSON ou na paleta exige verificar se este app precisa acompanhar.
+- A paleta de cores tem o web como fonte da verdade: `../my_budget/assets/css/app.css`.
+  `src/constants/palette.ts` é **gerado** por `npm run sync:palette` — nunca editar à mão.
+
 ## Expo has changed — do not trust your training data
 
 Expo ships breaking changes every SDK release. APIs you remember are likely renamed, moved, or removed. Before writing any code that touches an Expo, EAS, or React Native API:

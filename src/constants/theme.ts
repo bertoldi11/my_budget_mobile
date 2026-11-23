@@ -1,28 +1,44 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://unistyl.es/), etc.
+ * Tema do app. As cores vêm de `./palette.ts`, gerado a partir da paleta
+ * daisyUI do projeto web (../my_budget) — a fonte da verdade das duas pontas.
+ * Para mudar uma cor, mude lá e rode `npm run sync:palette`.
+ *
+ * Aqui ficam só os apelidos semânticos usados pelos componentes do app.
  */
 
 import '@/global.css';
 
 import { Platform } from 'react-native';
 
+import { ChartColors, Palette } from '@/constants/palette';
+
+/**
+ * Equivalente ao `text-base-content/60` do web: 60% de opacidade (0x99 = 153/255)
+ * sobre qualquer superfície.
+ */
+const muted = (hex: string) => `${hex}99`;
+
+function theme<T extends Record<string, string>>(palette: T) {
+  return {
+    ...palette,
+    /** base-100: fundo da tela */
+    background: palette.base100,
+    /** base-200: cartões, barras, campos */
+    backgroundElement: palette.base200,
+    /** base-300: estado selecionado e bordas */
+    backgroundSelected: palette.base300,
+    border: palette.base300,
+    text: palette.baseContent,
+    textSecondary: muted(palette.baseContent),
+  } as const;
+}
+
 export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
+  light: theme(Palette.light),
+  dark: theme(Palette.dark),
 } as const;
+
+export { ChartColors };
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
